@@ -1,0 +1,29 @@
+# ~/.config/starship.toml — two-line prompt, static colours for now.
+add_newline = false
+
+format = '''
+[┌──](bold fg:#565f89)([ $username](bold fg:#7aa2f7)[㉿](fg:#565f89)[$hostname](bold fg:#7aa2f7)[ )-](bold fg:#565f89)[$directory](bold fg:#9ece6a)
+[└─](bold fg:#565f89)$character'''
+
+[username]
+show_always = true
+style_user  = "bold fg:#7aa2f7"
+format      = "$user"
+
+[hostname]
+ssh_only = false
+format   = "$hostname"
+style    = "bold fg:#7aa2f7"
+
+[directory]
+format           = "$path"
+style            = "bold fg:#9ece6a"
+truncation_length = 3
+
+[git_branch]
+format = "[ $branch](fg:#e0af68)"
+style  = "fg:#e0af68"
+
+[character]
+success_symbol = "[❯](bold fg:#9ece6a)"
+error_symbol   = "[❯](bold fg:#f7768e)"

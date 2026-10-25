@@ -1,0 +1,44 @@
+/* ~/.config/waybar/style.css — same palette as the sway borders. */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(26, 27, 38, 0.92);
+    color: #c0caf5;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    background: transparent;
+    color: #565f89;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    background: #7aa2f7;
+    color: #1a1b26;
+}
+
+#workspaces button.urgent {
+    background: #f7768e;
+    color: #1a1b26;
+}
+
+#clock,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#tray {
+    padding: 0 10px;
+}
+
+#battery.warning  { color: #e0af68; }
+#battery.critical { color: #f7768e; }

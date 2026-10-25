@@ -1,0 +1,4 @@
+# Runtime state that must never be committed
+**/fish_variables
+**/*.bak
+**/*.log

@@ -1,0 +1,50 @@
+// ~/.config/waybar/config — minimal on purpose. Add one module at a time.
+// Docs: man 5 waybar  ·  restart: pkill waybar; waybar &
+{
+    "layer": "top",
+    "position": "top",
+    "height": 28,
+    "spacing": 8,
+
+    "modules-left":   ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock"],
+    "modules-right":  ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "sway/mode": { "format": " {} " },
+
+    "clock": {
+        "format": "{:%a %d %b  %H:%M}",
+        "tooltip-format": "{:%Y-%m-%d}"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " muted",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "pavucontrol"
+    },
+
+    "network": {
+        "format-wifi": " {essid}",
+        "format-ethernet": " {ifname}",
+        "format-disconnected": " offline",
+        "tooltip-format": "{ifname}: {ipaddr}"
+    },
+
+    "cpu":    { "format": " {usage}%",  "interval": 3 },
+    "memory": { "format": " {used:0.1f}G", "interval": 5 },
+
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "tray": { "spacing": 10 }
+}

@@ -1,0 +1,16 @@
+# ============================================================================
+#  ~/.config/sway/config  —  my own Sway setup
+#  Docs: `man 5 sway`  ·  validate: `sway --validate -c ~/.config/sway/config`
+# ============================================================================
+
+set $mod Mod4
+
+# Programs. Change these the moment you change your mind.
+set $term foot
+set $menu wmenu-run
+
+# My own modules (loaded alphabetically — the numbers are the order).
+include ~/.config/sway/config.d/*.conf
+
+# Distro snippets: systemd/D-Bus session environment.
+include /etc/sway/config.d/*
