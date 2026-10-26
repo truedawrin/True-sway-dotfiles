@@ -12,10 +12,10 @@ if ! command -v stow >/dev/null; then
 fi
 
 # --restow re-links everything; safe to run repeatedly.
-if ! stow --target="$HOME" --restow config; then
+if ! stow --target="$HOME/.config" --restow config; then
     echo >&2
     echo "Stow hit a conflict. Simulated view of the offending paths:" >&2
-    stow --target="$HOME" --simulate --restow config 2>&1 | sed 's/^/  /' >&2
+    stow --target="$HOME/.config" --simulate --restow config 2>&1 | sed 's/^/  /' >&2
     echo >&2
     echo "Move those existing files out of the way (or delete them) and retry." >&2
     exit 1

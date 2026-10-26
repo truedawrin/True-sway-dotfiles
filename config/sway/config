@@ -6,7 +6,7 @@
 set $mod Mod4
 
 # Programs. Change these the moment you change your mind.
-set $term foot
+set $term kitty
 set $menu wmenu-run
 
 # My own modules (loaded alphabetically — the numbers are the order).
