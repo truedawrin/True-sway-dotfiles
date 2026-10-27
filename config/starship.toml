@@ -1,8 +1,10 @@
 # ~/.config/starship.toml — two-line prompt, static colours for now.
 add_newline = false
 
+# NOTE: literal parentheses must be escaped as \( and \) — an unescaped (
+# is parsed by starship as the start of a conditional group.
 format = '''
-[┌──](bold fg:#565f89)([ $username](bold fg:#7aa2f7)[㉿](fg:#565f89)[$hostname](bold fg:#7aa2f7)[ )-](bold fg:#565f89)[$directory](bold fg:#9ece6a)
+[┌──](bold fg:#565f89)\([$username](bold fg:#7aa2f7)[㉿](fg:#565f89)[$hostname](bold fg:#7aa2f7)[\)-](bold fg:#565f89)[$directory](bold fg:#9ece6a)
 [└─](bold fg:#565f89)$character'''
 
 [username]
