@@ -3,7 +3,7 @@
 configuration {
     modi: "drun,run,window";
     show-icons: true;
-    terminal: "foot";
+    terminal: "kitty";
 }
 
 * {
@@ -13,7 +13,7 @@ configuration {
 }
 
 window {
-    width: 640px;
+    width: 740px;
     background-color: #1a1b26ee;
     border: 2px;
     border-color: #7aa2f7;

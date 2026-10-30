@@ -1,5 +1,8 @@
 # ~/.config/fish/config.fish — interactive shell setup.
 
+set -gx EDITOR /usr/bin/nvim
+set -gx VISUAL /usr/bin/nvim
+
 if status is-interactive
     set -g fish_greeting ""
 

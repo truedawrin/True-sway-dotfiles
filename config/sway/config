@@ -7,7 +7,7 @@ set $mod Mod4
 
 # Programs. Change these the moment you change your mind.
 set $term kitty
-set $menu wmenu-run
+set $menu rofi -show drun
 
 # My own modules (loaded alphabetically — the numbers are the order).
 include ~/.config/sway/config.d/*.conf

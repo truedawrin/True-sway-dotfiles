@@ -30,21 +30,45 @@
     },
 
     "network": {
-        "format-wifi": " {essid}",
-        "format-ethernet": " {ifname}",
-        "format-disconnected": " offline",
-        "tooltip-format": "{ifname}: {ipaddr}"
-    },
+    // "interface": "wlp2s0", // (Optional) To force the use of this interface
+    "format": "⚠  Disabled",
+    "format-wifi": "  {essid}",
+    // "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+    "format-ethernet": "  Wired",
+    "format-disconnected": "⚠  Disconnected",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "   {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "  {ifname} ({ipaddr}/{cidr})",
+    "tooltip-format-disconnected": "⚠  Disconnected",
+    "on-click": "swaymsg 'for_window [title=\\\"impala\\\"] floating enable, resize set 800 600, move position center'; kitty --title impala -e impala"
+   },
 
-    "cpu":    { "format": " {usage}%",  "interval": 3 },
-    "memory": { "format": " {used:0.1f}G", "interval": 5 },
+     "cpu": {
+      "format": " {usage: >3}%",
+      "on-click": "kitty -e btop"
+      },
+      "memory": {
+      "format": " {: >3}%",
+      "on-click": "kitty -e btop"
+      },
 
+
+    
     "battery": {
-        "states": { "warning": 30, "critical": 15 },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
     },
+    "format": "{icon} {capacity: >3}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-alt": "{icon}  {time}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""]
+  },
+
 
     "tray": { "spacing": 10 }
 }
