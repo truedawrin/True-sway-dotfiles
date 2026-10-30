@@ -8,8 +8,8 @@
         "format": "",
         "tooltip": true,
         "tooltip-format": "Edit Waybar config",
-        "on-click": "kitty --class waybar-config --title 'Waybar Config' --directory /home/dawrin/dotfiles/config/waybar nvim config.jsonc",
-        "on-click-right": "swaymsg reload && swaymsg 'exec --no-startup-id /home/dawrin/.config/waybar/scripts/restart-waybar.sh'"
+        "on-click": "kitty --class waybar-config --title 'Waybar Config' --directory ~/.config/waybar nvim config.jsonc",
+        "on-click-right": "swaymsg reload && swaymsg 'exec --no-startup-id ~/.config/waybar/scripts/restart-waybar.sh'"
     },
     "sway/mode": { "format": " {name} " },
 
@@ -176,6 +176,14 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "on-click": "kitty --class waybar-system --title bluetui -e bluetui"
 },
+  "custom/screen-recorder": {
+    "exec": "bash ~/.config/wallpaper/screen-record --status",
+    "return-type": "json",
+    "interval": 1,
+    "format": "{text}",
+    "tooltip": true,
+    "on-click": "bash ~/.config/wallpaper/screen-record --toggle"
+  },
 
 
 

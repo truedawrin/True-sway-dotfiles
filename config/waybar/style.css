@@ -1,5 +1,5 @@
 /* Floating Waybar island: all palette colors come from the Wallust import. */
-@import url("file:///home/dawrin/.cache/wallpaper-theme/waybar-colors.css");
+@import url("wallust-colors.css");
 
 * {
     font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
@@ -38,6 +38,7 @@ window#waybar {
 #backlight,
 #battery,
 #idle_inhibitor,
+#custom-screen-recorder,
 #custom-power,
 #custom-pacman,
 #tray {
@@ -117,6 +118,7 @@ window#waybar {
 
 #network,
 #bluetooth,
+#custom-screen-recorder,
 #disk,
 #cpu,
 #memory,
@@ -136,6 +138,25 @@ window#waybar {
     margin-right: 6px;
     padding: 0 12px 0 7px;
     border-right: 1px solid alpha(@theme_fg, 0.18);
+}
+
+#custom-screen-recorder {
+    color: @theme_fg;
+    padding: 0 8px;
+}
+
+#custom-screen-recorder:hover {
+    color: @theme_accent;
+}
+
+#custom-screen-recorder.recording {
+    color: @theme_urgent;
+    font-weight: 700;
+}
+
+#custom-screen-recorder.selecting,
+#custom-screen-recorder.countdown {
+    color: @theme_warning;
 }
 
 #network.disconnected,

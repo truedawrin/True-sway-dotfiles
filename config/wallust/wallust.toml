@@ -6,8 +6,9 @@ check_contrast = true
 [templates]
 sway = { template = "sway-colors.conf", target = "~/.cache/wallpaper-theme/sway-colors.conf" }
 rofi = { template = "rofi-colors.rasi", target = "~/.cache/wallpaper-theme/rofi-colors.rasi" }
-waybar = { template = "waybar-colors.css", target = "~/.cache/wallpaper-theme/waybar-colors.css" }
+waybar = { template = "waybar-colors.css", target = "~/.config/waybar/wallust-colors.css" }
 kitty = { template = "kitty-colors.conf", target = "~/.cache/wallpaper-theme/kitty-colors.conf" }
 swaylock = { template = "swaylock.conf", target = "~/.cache/wallpaper-theme/swaylock.conf" }
-btop = { template = "btop.theme", target = "~/.cache/wallpaper-theme/btop.theme" }
+btop = { template = "btop.theme", target = "~/.config/btop/themes/wallpaper.theme" }
 mako = { template = "mako.conf", target = "~/.config/mako/config" }
+accent = { template = "accent-color.txt", target = "~/.cache/wallpaper-theme/accent-color.txt" }

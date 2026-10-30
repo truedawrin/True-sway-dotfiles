@@ -6,11 +6,60 @@ STATE_FILE="$STATE_DIR/current-wallpaper"
 FALLBACK_WALLPAPER="/usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png"
 mkdir -p "$STATE_DIR"
 
+apply_wallust_accent() {
+    local accent_file="$STATE_DIR/accent-color.txt" accent
+    [[ -r "$accent_file" ]] || return 0
+    IFS= read -r accent < "$accent_file" || true
+    [[ "$accent" =~ ^#[[:xdigit:]]{6}$ ]] || return 0
+
+    python3 - "$accent" <<'PY'
+from pathlib import Path
+import re
+import sys
+
+accent = sys.argv[1]
+
+def update(path, pattern, replacement):
+    path = Path(path)
+    if not path.is_file():
+        return
+    text = path.read_text()
+    changed, count = re.subn(pattern, replacement, text, count=1, flags=re.MULTILINE)
+    if count:
+        path.write_text(changed)
+
+mpv = Path.home() / ".config/mpv/script-opts/modernz.conf"
+for key in ("seekbarfg_color", "windowcontrols_minmax_hover"):
+    update(mpv, rf"^({key}=).*", rf"\g<1>{accent}")
+
+update(
+    Path.home() / ".config/firefox/start.html",
+    r"(a:hover\s*\{\s*color:\s*)#[0-9a-fA-F]{6}(\s*;)",
+    rf"\g<1>{accent}\g<2>",
+)
+update(
+    Path.home() / ".config/firefox/extensions/ublock.json",
+    r'("uiAccentCustom0"\s*:\s*")[^"]+(",)',
+    rf"\g<1>{accent}\g<2>",
+)
+sidebery = Path.home() / ".config/firefox/extensions/sidebery.json"
+for variable in ("--accent", "--windows-popup-window-border", "--toolbar-el-overlay-selected-border"):
+    update(sidebery, rf"({re.escape(variable)}:\s*)#[0-9a-fA-F]{{6}}", rf"\g<1>{accent}")
+update(
+    Path.home() / ".config/tatuin/gruvbox-material-dark.theme",
+    r"^(high_priority_fg=).*",
+    rf"\g<1>{accent}",
+)
+PY
+}
+
 apply_wallpaper() {
     local image="$1"
     [[ -f "$image" ]] || { printf 'Wallpaper not found: %s\n' "$image" >&2; exit 1; }
     command -v wallust >/dev/null || { printf 'Install Wallust first: sudo pacman -S wallust\n' >&2; exit 1; }
+    mkdir -p "$HOME/.config/waybar" "$HOME/.config/btop/themes"
     wallust run --quiet --skip-sequences --config-dir "$HOME/.config/wallust" "$image"
+    apply_wallust_accent
     if command -v makoctl >/dev/null; then
         makoctl reload >/dev/null 2>&1 || true
     fi

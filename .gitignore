@@ -2,3 +2,6 @@
 **/fish_variables
 **/*.bak
 **/*.log
+# Wallust writes generated themes through the Stow links into these folders.
+/config/waybar/wallust-colors.css
+/config/btop/themes/wallpaper.theme

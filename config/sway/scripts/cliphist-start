@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+start_watcher() {
+    local content_type="$1"
+    if ! pgrep -u "$UID" -f "[w]l-paste --type ${content_type} --watch cliphist store" >/dev/null; then
+        nohup wl-paste --type "$content_type" --watch cliphist store \
+            </dev/null >/dev/null 2>&1 &
+    fi
+}
+
+start_watcher text
+start_watcher image

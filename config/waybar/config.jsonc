@@ -30,6 +30,7 @@
             "cpu",
             "memory",
             "bluetooth",
+            "custom/screen-recorder",
             "idle_inhibitor",
             "custom/power",
             "custom/pacman",
