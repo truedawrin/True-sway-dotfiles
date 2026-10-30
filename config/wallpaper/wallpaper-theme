@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+WALLPAPER_DIR="${WALLPAPER_DIR:-$HOME/Pictures/Wallpapers}"
+STATE_DIR="$HOME/.cache/wallpaper-theme"
+STATE_FILE="$STATE_DIR/current-wallpaper"
+FALLBACK_WALLPAPER="/usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png"
+mkdir -p "$STATE_DIR"
+
+apply_wallpaper() {
+    local image="$1"
+    [[ -f "$image" ]] || { printf 'Wallpaper not found: %s\n' "$image" >&2; exit 1; }
+    command -v wallust >/dev/null || { printf 'Install Wallust first: sudo pacman -S wallust\n' >&2; exit 1; }
+    wallust run --quiet --skip-sequences --config-dir "$HOME/.config/wallust" "$image"
+    local state_tmp="$STATE_FILE.tmp.$$"
+    printf '%s\n' "$image" > "$state_tmp"
+    mv -f -- "$state_tmp" "$STATE_FILE"
+    if [[ -n "${SWAYSOCK:-}" ]] && command -v swaymsg >/dev/null; then
+        pkill -x swaybg 2>/dev/null || true
+        swaybg -m fill -i "$image" >/dev/null 2>&1 & disown
+        swaymsg reload >/dev/null 2>&1 || true
+        if pgrep -x waybar >/dev/null; then
+            pkill -x waybar 2>/dev/null || true
+            waybar >/dev/null 2>&1 & disown
+        fi
+    fi
+    pkill -USR1 -x kitty 2>/dev/null || true
+    printf 'Wallpaper and palette applied: %s\n' "$image"
+}
+
+pick_wallpaper() {
+    command -v rofi >/dev/null || { printf 'Rofi is required for the wallpaper menu.\n' >&2; exit 1; }
+    [[ -d "$WALLPAPER_DIR" ]] || { printf 'Wallpaper folder not found: %s\n' "$WALLPAPER_DIR" >&2; exit 1; }
+    local -a images=()
+    mapfile -d '' -t images < <(find "$WALLPAPER_DIR" -type f \
+        \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.bmp' -o -iname '*.avif' \) \
+        -print0 | sort -z)
+    ((${#images[@]})) || { printf 'No image wallpapers found in %s\n' "$WALLPAPER_DIR" >&2; exit 1; }
+    local image label choice entries
+    entries="$(mktemp)"
+    for image in "${images[@]}"; do
+        label="${image##*/}"
+        printf '%s\0icon\x1f%s\n' "$label" "$image" >> "$entries"
+    done
+    choice="$(rofi -dmenu -i -no-custom -show-icons -format i \
+        -p 'Choose wallpaper' \
+        -theme-str 'window { width: 78%; } listview { columns: 4; lines: 3; fixed-height: false; } element { orientation: vertical; } element-icon { size: 10em; } element-text { horizontal-align: 0.5; }' < "$entries" || true)"
+    rm -f -- "$entries"
+    [[ "$choice" =~ ^[0-9]+$ ]] || return 0
+    ((choice < ${#images[@]})) || return 0
+    apply_wallpaper "${images[$choice]}"
+}
+
+case "${1:---pick}" in
+    --pick) pick_wallpaper ;;
+    --restore)
+        image="$FALLBACK_WALLPAPER"
+        if [[ -r "$STATE_FILE" ]]; then IFS= read -r image < "$STATE_FILE" || true; fi
+        [[ -f "$image" ]] || image="$FALLBACK_WALLPAPER"
+        apply_wallpaper "$image"
+        ;;
+    --apply)
+        [[ $# -eq 2 ]] || { printf 'Usage: %s --apply IMAGE\n' "$0" >&2; exit 2; }
+        apply_wallpaper "$2"
+        ;;
+    *) printf 'Usage: %s [--pick|--restore|--apply IMAGE]\n' "$0" >&2; exit 2 ;;
+esac

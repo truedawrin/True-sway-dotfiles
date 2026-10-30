@@ -1,44 +1,177 @@
-/* ~/.config/waybar/style.css — same palette as the sway borders. */
+/* Floating Waybar island: all palette colors come from the Wallust import. */
+@import url("file:///home/dawrin/.cache/wallpaper-theme/waybar-colors.css");
 
 * {
     font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
-    font-size: 13px;
+    font-size: 12px;
     border: none;
-    border-radius: 0;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(26, 27, 38, 0.92);
-    color: #c0caf5;
+    background: transparent;
+    color: @theme_fg;
+}
+
+#island {
+    background-color: alpha(@theme_bg, 0.88);
+    border: 1px solid alpha(@theme_fg, 0.16);
+    border-radius: 999px;
+    padding: 0 10px;
+}
+
+#custom-arch-logo,
+#workspaces,
+#mode,
+#custom-cava-internal,
+#mpd,
+#mpd\\.2,
+#mpd\\.3,
+#mpd\\.4,
+#clock,
+#network,
+#disk,
+#cpu,
+#memory,
+#pulseaudio,
+#backlight,
+#battery,
+#idle_inhibitor,
+#custom-power,
+#custom-pacman,
+#custom-mpd,
+#tray {
+    background: transparent;
+}
+
+#custom-arch-logo {
+    color: @theme_accent;
+    font-size: 17px;
+    padding: 0 10px 0 6px;
 }
 
 #workspaces button {
-    padding: 0 10px;
+    min-width: 28px;
+    margin: 5px 2px;
+    padding: 0 8px;
+    border-radius: 999px;
     background: transparent;
-    color: #565f89;
+    color: @theme_muted;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+#workspaces button:hover {
+    background: alpha(@theme_accent, 0.24);
+    color: @theme_fg;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-    background: #7aa2f7;
-    color: #1a1b26;
+    background: @theme_accent;
+    color: @theme_bg;
 }
 
 #workspaces button.urgent {
-    background: #f7768e;
-    color: #1a1b26;
+    background: @theme_urgent;
+    color: @theme_bg;
 }
 
-#clock,
-#pulseaudio,
+#mode {
+    color: @theme_warning;
+    font-weight: 700;
+    padding: 0 8px;
+}
+
+#custom-cava-internal {
+    color: @theme_accent;
+    padding: 0 7px;
+}
+
+#mpd,
+#mpd\\.2,
+#mpd\\.3,
+#mpd\\.4,
+#custom-mpd {
+    color: @theme_fg;
+    padding: 0 5px;
+}
+
+#mpd\\.2,
+#mpd\\.4 {
+    color: @theme_muted;
+}
+
+#mpd\\.3 {
+    color: @theme_accent;
+}
+
+#mpd:hover,
+#mpd\\.2:hover,
+#mpd\\.3:hover,
+#mpd\\.4:hover,
+#custom-mpd:hover {
+    color: @theme_fg;
+}
+
+#clock {
+    color: @theme_fg;
+    margin-left: 6px;
+    padding: 0 12px 0 14px;
+    border-left: 1px solid alpha(@theme_fg, 0.18);
+    font-weight: 700;
+}
+
 #network,
+#disk,
 #cpu,
 #memory,
+#pulseaudio,
+#backlight,
 #battery,
+#idle_inhibitor,
+#custom-power,
+#custom-pacman,
 #tray {
-    padding: 0 10px;
+    color: @theme_fg;
+    padding: 0 7px;
 }
 
-#battery.warning  { color: #e0af68; }
-#battery.critical { color: #f7768e; }
+#network.disconnected,
+#network.disabled {
+    color: @theme_urgent;
+}
+
+#cpu.warning,
+#memory.warning,
+#disk.warning,
+#battery.warning {
+    color: @theme_warning;
+}
+
+#cpu.critical,
+#memory.critical,
+#disk.critical,
+#battery.critical {
+    color: @theme_urgent;
+}
+
+#pulseaudio.muted {
+    color: @theme_muted;
+}
+
+#idle_inhibitor.activated {
+    color: @theme_accent;
+}
+
+#custom-power {
+    color: @theme_urgent;
+    padding: 0 8px;
+}
+
+#custom-pacman {
+    color: @theme_warning;
+}
+
+#tray {
+    padding: 0 6px 0 8px;
+}

@@ -6,26 +6,54 @@ configuration {
     terminal: "kitty";
 }
 
+?import "~/.cache/wallpaper-theme/rofi-colors.rasi"
+
 * {
     font: "JetBrainsMono Nerd Font 11";
     background-color: transparent;
-    text-color: #c0caf5;
+    text-color: @fg;
 }
 
 window {
     width: 740px;
-    background-color: #1a1b26ee;
+    background-color: @bg;
     border: 2px;
-    border-color: #7aa2f7;
+    border-color: @accent;
     border-radius: 8px;
     padding: 12px;
 }
 
 inputbar { padding: 4px 8px 10px 8px; }
-prompt   { padding-right: 8px; color: #7aa2f7; }
+prompt   { padding-right: 8px; color: @accent; }
 
 listview { lines: 8; spacing: 4px; }
 
-element          { padding: 6px 8px; border-radius: 4px; }
-element selected { background-color: #7aa2f7; text-color: #1a1b26; }
-element-icon     { size: 1.4em; }
+element { padding: 6px 8px; border-radius: 4px; }
+
+/* Clear Rofi's built-in light row fills in every mode. */
+element normal.normal,
+element alternate.normal,
+element normal.active,
+element alternate.active {
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected.normal,
+element selected.active {
+    background-color: @accent;
+    text-color: @bg;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color: transparent;
+    text-color: @urgent;
+}
+
+element selected.urgent {
+    background-color: @urgent;
+    text-color: @bg;
+}
+
+element-icon { size: 1.4em; }

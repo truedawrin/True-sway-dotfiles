@@ -1,0 +1,12 @@
+backend = "resized"
+color_space = "lab"
+palette = "dark"
+check_contrast = true
+
+[templates]
+sway = { template = "sway-colors.conf", target = "~/.cache/wallpaper-theme/sway-colors.conf" }
+rofi = { template = "rofi-colors.rasi", target = "~/.cache/wallpaper-theme/rofi-colors.rasi" }
+waybar = { template = "waybar-colors.css", target = "~/.cache/wallpaper-theme/waybar-colors.css" }
+kitty = { template = "kitty-colors.conf", target = "~/.cache/wallpaper-theme/kitty-colors.conf" }
+swaylock = { template = "swaylock.conf", target = "~/.cache/wallpaper-theme/swaylock.conf" }
+btop = { template = "btop.theme", target = "~/.cache/wallpaper-theme/btop.theme" }

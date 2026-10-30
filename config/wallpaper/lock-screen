@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+THEME="$HOME/.cache/wallpaper-theme/swaylock.conf"
+if [[ -s "$THEME" ]]; then exec swaylock -f -C "$THEME"; fi
+exec swaylock -f
