@@ -72,8 +72,9 @@ apply_wallpaper() {
         swaymsg reload >/dev/null 2>&1 || true
         if pgrep -x waybar >/dev/null; then
             pkill -x waybar 2>/dev/null || true
-            waybar >/dev/null 2>&1 & disown
+            sleep 0.3
         fi
+        waybar >/dev/null 2>&1 & disown
     fi
     pkill -USR1 -x kitty 2>/dev/null || true
     printf 'Wallpaper and palette applied: %s\n' "$image"
