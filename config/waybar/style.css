@@ -24,10 +24,10 @@ window#waybar {
 #workspaces,
 #mode,
 #custom-cava-internal,
-#mpd,
-#mpd\\.2,
-#mpd\\.3,
-#mpd\\.4,
+#custom-media-prev,
+#custom-media-toggle,
+#custom-media-next,
+#mpris,
 #clock,
 #network,
 #disk,
@@ -39,7 +39,6 @@ window#waybar {
 #idle_inhibitor,
 #custom-power,
 #custom-pacman,
-#custom-mpd,
 #tray {
     background: transparent;
 }
@@ -87,29 +86,23 @@ window#waybar {
     padding: 0 7px;
 }
 
-#mpd,
-#mpd\\.2,
-#mpd\\.3,
-#mpd\\.4,
-#custom-mpd {
-    color: @theme_fg;
+#custom-media-prev,
+#custom-media-toggle,
+#custom-media-next,
+#mpris {
+    color: @theme_accent;
     padding: 0 5px;
 }
 
-#mpd\\.2,
-#mpd\\.4 {
+#mpris.paused,
+#mpris.stopped {
     color: @theme_muted;
 }
 
-#mpd\\.3 {
-    color: @theme_accent;
-}
-
-#mpd:hover,
-#mpd\\.2:hover,
-#mpd\\.3:hover,
-#mpd\\.4:hover,
-#custom-mpd:hover {
+#custom-media-prev:hover,
+#custom-media-toggle:hover,
+#custom-media-next:hover,
+#mpris:hover {
     color: @theme_fg;
 }
 
@@ -155,6 +148,11 @@ window#waybar {
     color: @theme_urgent;
 }
 
+#battery.charging,
+#battery.plugged {
+    color: @theme_accent;
+}
+
 #pulseaudio.muted {
     color: @theme_muted;
 }
@@ -168,8 +166,17 @@ window#waybar {
     padding: 0 8px;
 }
 
-#custom-pacman {
-    color: @theme_warning;
+#custom-pacman.available {
+    color: @theme_accent;
+    font-weight: 700;
+}
+
+#custom-pacman.current {
+    color: @theme_muted;
+}
+
+#custom-pacman.error {
+    color: @theme_urgent;
 }
 
 #tray {

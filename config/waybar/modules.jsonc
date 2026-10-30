@@ -9,7 +9,7 @@
         "tooltip": true,
         "tooltip-format": "Edit Waybar config",
         "on-click": "kitty --class waybar-config --title 'Waybar Config' --directory /home/dawrin/dotfiles/config/waybar nvim config.jsonc",
-        "on-click-right": "swaymsg reload & pkill waybar & waybar"
+        "on-click-right": "swaymsg reload && swaymsg 'exec --no-startup-id /home/dawrin/.config/waybar/scripts/restart-waybar.sh'"
     },
     "sway/mode": { "format": " {name} " },
 
@@ -83,51 +83,40 @@
         "format-icons": ["", "", "", "", ""]
     },
 
-    "mpd": {
-      "tooltip": true,
-      "tooltip-format": "{artist} - {album} - {title} - Total Time : {totalTime:%M:%S}",
-      "format": " {elapsedTime:%M:%S}",
-      "format-disconnected": "⚠  Disconnected",
-      "format-stopped": " Not Playing",
-      "on-click": "mpc toggle",
-      "state-icons": {
-        "playing": "",
-        "paused": ""
-      }
-    },
-    "mpd#2": {
+  "mpris": {
+    "player": "playerctld",
+    "format": " {artist} — {title}",
+    "format-paused": " {artist} — {title}",
+    "format-stopped": "",
+    "tooltip-format": "{player}: {artist} — {album} — {title}",
+    "max-length": 34,
+    "interval": 2
+  },
+
+  //
+
+  "custom/media-prev": {
+    "exec-if": "playerctl --player=playerctld status",
     "format": "",
-    "format-disconnected": "",
-    "format-paused": "",
-    "format-stopped": "",
-    // Commands to execute on events
-    "on-click": "mpc -q pause && mpc -q prev && mpc -q start"
+    "tooltip": true,
+    "tooltip-format": "Previous track",
+    "on-click": "playerctl --player=playerctld previous"
   },
-  "mpd#3": {
-    "interval": 1,
-    "format": "{stateIcon}",
-    "format-disconnected": "",
-    "format-paused": "{stateIcon}",
-    "format-stopped": "",
-    "state-icons": {
-      "paused": "",
-      "playing": ""
-    },
-    // Commands to execute on events
-    "on-click": "mpc toggle"
+  "custom/media-toggle": {
+    "exec-if": "playerctl --player=playerctld status",
+    "exec": "playerctl --player=playerctld status 2>/dev/null | sed -e 's/^Playing$//' -e 's/^Paused$//' -e 's/^Stopped$//'",
+    "interval": 2,
+    "format": "{}",
+    "tooltip": true,
+    "tooltip-format": "Play / pause",
+    "on-click": "playerctl --player=playerctld play-pause"
   },
-  "mpd#4": {
+  "custom/media-next": {
+    "exec-if": "playerctl --player=playerctld status",
     "format": "",
-    "format-disconnected": "",
-    "format-paused": "",
-    "format-stopped": "",
-    // Commands to execute on events
-    "on-click": "mpc -q pause && mpc -q next && mpc -q start"
-  },
-  "custom/mpd": {
-    "format": " {title} - {artist}",
-    "interval": 5,
-    "exec": "mpc current --format='\"title\":\"%title%\",\"artist\":\"%artist%\"'"
+    "tooltip": true,
+    "tooltip-format": "Next track",
+    "on-click": "playerctl --player=playerctld next"
   },
   "custom/cava-internal": {
     "exec": "bash ~/.config/waybar/scripts/Cava.sh",
@@ -162,11 +151,12 @@
     "on-click": ""
   },
   "custom/pacman": {
-    "format": " {}",
-    "interval": 7200, // every two hours
-    "exec": "i=$(checkupdates); echo \"$i\" |wc -l; echo \"$i\" |column -t |tr '\n' '\r'", // # of updates and tooltip details
-    "exec-if": "exit 0", // always run; consider advanced run conditions
-    "on-click": "kitty -e sudo pacman -Syu", // update system
+    "return-type": "json",
+    "format": "{text}",
+    "tooltip": true,
+    "interval": 7200,
+    "exec": "~/.config/waybar/scripts/checkupdates-waybar.sh",
+    "on-click": "kitty --hold --class waybar-system --title 'Official Repo Upgrade' -e sudo pacman -Syu",
     "signal": 8
   },
   "custom/power": {

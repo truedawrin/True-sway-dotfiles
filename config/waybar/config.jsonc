@@ -2,7 +2,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 48,
+    "height": 50,
     "margin": "8px 12px 0px",
     "spacing": 0,
 
@@ -17,10 +17,10 @@
             "sway/workspaces",
             "sway/mode",
             "custom/cava-internal",
-            "mpd#2",
-            "mpd#3",
-            "mpd#4",
-            "mpd",
+            "custom/media-prev",
+            "custom/media-toggle",
+            "custom/media-next",
+            "mpris",
             "clock",
             "network",
             "disk",
@@ -31,6 +31,7 @@
             "battery",
             "idle_inhibitor",
             "custom/power",
+            "custom/pacman",
             "tray"
         ]
     },

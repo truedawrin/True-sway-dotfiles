@@ -2,7 +2,8 @@
 set -o pipefail
 
 source_config="$HOME/.config/cava/config"
-temp_config="$(mktemp)"
+umask 077
+temp_config="${XDG_RUNTIME_DIR:-/tmp}/waybar-cava-${UID}.conf"
 trap 'rm -f "$temp_config"' EXIT
 
 # Reuse Cava's input, smoothing, and Wallust color settings, but stream a compact
