@@ -2,7 +2,11 @@
 
 My Arch Linux desktop setup, built around Sway, Waybar, Rofi and Wallust. The configs live in this repository and GNU Stow links them into `~/.config`, so edits made here are the ones your apps use.
 
-[Watch the short desktop tour](assets/sway-dotfiles-tour.mp4)
+
+
+https://github.com/user-attachments/assets/d07f4f83-e2e4-425c-b4f8-2c2f4ec3ddd1
+
+
 
 ## Install
 
