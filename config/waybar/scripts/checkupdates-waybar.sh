@@ -16,11 +16,11 @@ else
         count="$(printf '%s\n' "$updates" | awk 'NF { n++ } END { print n+0 }')"
         text=" $count"
         class='available'
-        tooltip="$count repo updates available:\n$updates\n\nLeft-click: pacman repo upgrade\nRight-click: paru repo + AUR upgrade"
+        tooltip="$count repo updates available:\n$updates\n\nLeft-click: pacman repo upgrade"
     elif (( status == 0 || status == 2 )); then
         text=' 0'
         class='current'
-        tooltip='No repo updates available.\n\nLeft-click: pacman repo upgrade\nRight-click: paru repo + AUR upgrade'
+        tooltip='No repo updates available.\n\nLeft-click: pacman repo upgrade'
     else
         text=' !'
         class='error'

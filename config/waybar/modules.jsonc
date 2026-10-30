@@ -165,6 +165,18 @@
     "on-click": "~/.config/rofi/powermenu/power-menu.sh",
     "tooltip": false
   },
+  "bluetooth": {
+    "format": " {status}",
+    "format-on": " On",
+    "format-off": " Off",
+    "format-disabled": "   Disabled",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "on-click": "kitty --class waybar-system --title bluetui -e bluetui"
+},
+
 
 
     "tray": { "spacing": 8, "icon-size": 16 }
