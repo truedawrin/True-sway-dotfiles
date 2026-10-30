@@ -30,6 +30,7 @@ window#waybar {
 #mpris,
 #clock,
 #network,
+#bluetooth,
 #disk,
 #cpu,
 #memory,
@@ -115,6 +116,7 @@ window#waybar {
 }
 
 #network,
+#bluetooth,
 #disk,
 #cpu,
 #memory,
@@ -127,6 +129,13 @@ window#waybar {
 #tray {
     color: @theme_fg;
     padding: 0 7px;
+}
+
+#bluetooth {
+    color: @theme_accent;
+    margin-right: 6px;
+    padding: 0 12px 0 7px;
+    border-right: 1px solid alpha(@theme_fg, 0.18);
 }
 
 #network.disconnected,

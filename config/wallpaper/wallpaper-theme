@@ -11,6 +11,9 @@ apply_wallpaper() {
     [[ -f "$image" ]] || { printf 'Wallpaper not found: %s\n' "$image" >&2; exit 1; }
     command -v wallust >/dev/null || { printf 'Install Wallust first: sudo pacman -S wallust\n' >&2; exit 1; }
     wallust run --quiet --skip-sequences --config-dir "$HOME/.config/wallust" "$image"
+    if command -v makoctl >/dev/null; then
+        makoctl reload >/dev/null 2>&1 || true
+    fi
     local state_tmp="$STATE_FILE.tmp.$$"
     printf '%s\n' "$image" > "$state_tmp"
     mv -f -- "$state_tmp" "$STATE_FILE"
