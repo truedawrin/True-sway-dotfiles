@@ -12,6 +12,8 @@ write_state() {
     local state="$1" tmp="$state_dir/status.tmp.$$"
     printf '%s\n' "$state" > "$tmp"
     mv -f -- "$tmp" "$state_file"
+    # Refresh the custom module immediately; keep the 1 s poll as a fallback.
+    pkill -RTMIN+8 -x waybar 2>/dev/null || true
 }
 
 show_status() {

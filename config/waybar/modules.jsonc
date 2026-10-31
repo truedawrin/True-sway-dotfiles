@@ -179,10 +179,11 @@
   "custom/screen-recorder": {
     "exec": "bash ~/.config/wallpaper/screen-record --status",
     "return-type": "json",
+    "signal": 8,
     "interval": 1,
     "format": "{text}",
     "tooltip": true,
-    "on-click": "bash ~/.config/wallpaper/screen-record --toggle"
+    "on-click": "setsid -f bash ~/.config/wallpaper/screen-record --toggle"
   },
 
 
