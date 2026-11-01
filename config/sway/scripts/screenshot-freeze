@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if ! command -v grim >/dev/null 2>&1 || ! command -v satty >/dev/null 2>&1; then
+    notify-send "Screenshot unavailable" "Install grim and satty to use frozen screenshots."
+    exit 1
+fi
+
+mkdir -p "$HOME/Pictures/Screenshots"
+
+# Capture first, at the key press. Satty then edits this fixed image, so video
+# and other changing content cannot advance while the region is being cropped.
+grim - | satty \
+    --filename - \
+    --fullscreen current-screen \
+    --initial-tool crop \
+    --output-filename "$HOME/Pictures/Screenshots/Screenshot_%Y%m%d_%H%M%S.png" \
+    --copy-command wl-copy
