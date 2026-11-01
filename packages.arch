@@ -5,10 +5,8 @@ kitty
 fish
 starship
 rofi
-wallust
 swaybg
 swayidle
-swaylock-effects
 mako
 polkit-gnome
 playerctl
@@ -20,7 +18,9 @@ slurp
 swappy
 wf-recorder
 ffmpeg
+pipewire-audio
 pipewire-pulse
+wireplumber
 pulsemixer
 libpulse
 mpd
@@ -39,3 +39,10 @@ bat
 fastfetch
 ttf-jetbrains-mono-nerd
 libnotify
+cava
+satty
+bluetui
+bluez
+bluez-utils
+impala
+iwd

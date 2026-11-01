@@ -10,16 +10,18 @@ https://github.com/user-attachments/assets/d07f4f83-e2e4-425c-b4f8-2c2f4ec3ddd1
 
 ## Install
 
-Start with Git and Stow, then clone the repo and run the installer:
+Start with Git, then clone the repo and run the installer:
 
 ```sh
-sudo pacman -S --needed git stow
+sudo pacman -S --needed git
 git clone https://github.com/truedawrin/True-sway-dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh
 ```
 
-The installer checks for conflicts, installs any missing packages listed in `packages.arch`, and links `config/` into `~/.config`. It is safe to run again after pulling changes. Existing files that conflict with a Stow link are left alone; the installer prints the paths to move or back up before retrying.
+The installer checks for conflicts, installs any missing official packages listed in `packages.arch`, installs AUR packages listed in `packages.aur`, enables Bluetooth and MPD, and links `config/` into `~/.config`. It uses `paru` or `yay` if available; if neither is installed, it builds `paru` from the AUR. Review package prompts as they appear. Existing files that conflict with a Stow link are left alone; the installer prints the paths to move or back up before retrying.
+
+The installer checks installed package and service state before making changes. Run it again after pulling updates; if everything is already present and linked, it reports that and exits without reinstalling packages. `--check` only reports missing packages, service setup, or link work. `--no-packages` only refreshes the Stow links.
 
 To preview package gaps and link conflicts without changing anything, run `./install.sh --check`. To only refresh the links, use `./install.sh --no-packages`.
 
@@ -29,11 +31,7 @@ Put your images in `~/Pictures/Wallpapers`, then start a Sway session. The wallp
 
 The clipboard history is saved by `cliphist` while Sway is running. Copy text or an image, then press **Mod+V** to search the history. The installer reloads Sway when it is run inside a Sway session; otherwise, run `swaymsg reload` once after installing to start the clipboard watchers.
 
-If you use MPD, enable its user service:
-
-```sh
-systemctl --user enable --now mpd
-```
+The installer starts Mako from Sway and enables MPD and Bluetooth. The Wi-Fi click action opens Impala, which needs `iwd` as its Wi-Fi backend; the installer installs both, but does not enable `iwd.service` because that can conflict with NetworkManager or another Wi-Fi backend. Enable it only if you choose iwd to manage Wi-Fi.
 
 ## Key controls
 
