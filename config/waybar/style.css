@@ -35,6 +35,7 @@ window#waybar {
 #cpu,
 #memory,
 #pulseaudio,
+#custom-microphone,
 #backlight,
 #battery,
 #idle_inhibitor,
@@ -119,6 +120,7 @@ window#waybar {
 #network,
 #bluetooth,
 #custom-screen-recorder,
+#custom-microphone,
 #disk,
 #cpu,
 #memory,
@@ -185,6 +187,22 @@ window#waybar {
 
 #pulseaudio.muted {
     color: @theme_muted;
+}
+
+#custom-microphone {
+    color: @theme_accent;
+    padding: 0 8px;
+    margin-right: 6px;
+    border-right: 1px solid alpha(@theme_fg, 0.18);
+}
+
+#custom-microphone.muted {
+    color: @theme_urgent;
+    font-weight: 700;
+}
+
+#custom-microphone.unavailable {
+    color: @theme_warning;
 }
 
 #idle_inhibitor.activated {

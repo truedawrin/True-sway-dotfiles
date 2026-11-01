@@ -65,6 +65,17 @@
         "on-click": "kitty --class waybar-audio --title 'Audio Mixer' -e pulsemixer"
     },
 
+    "custom/microphone": {
+        "exec": "bash ~/.config/waybar/scripts/microphone.sh --status",
+        "return-type": "json",
+        "format": "{text}",
+        "tooltip": true,
+        "interval": 1,
+        "signal": 9,
+        "exec-on-event": false,
+        "on-click": "bash ~/.config/waybar/scripts/microphone.sh --toggle"
+    },
+
 
     "cpu": {
         "format": " {usage: >3}%",
@@ -189,5 +200,4 @@
 
 
     "tray": { "spacing": 8, "icon-size": 16 }
-}
 }
